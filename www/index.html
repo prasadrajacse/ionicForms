@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="starter">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/angular-messages/angular-messages.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+  </head>
+  <body ng-controller="formCtrl">
+
+    <ion-pane>
+      <ion-header-bar class="bar-stable">
+        <h1 class="title">Ionic Forms</h1>
+      </ion-header-bar>
+      <ion-content>
+
+        <form ng-submit="doLogin()" name="loginForm">
+          <div class="list">
+            <label class="item item-input">
+              <span class="input-label">Username</span>
+              <input type="text" name="username" ng-model="loginData.username" ng-minlength="5" ng-maxlength="30" required>
+            </label>
+
+            <div ng-messages="loginForm.username.$error" ng-if="loginForm.username.$touched" style="color:maroon" role="alert">
+              <div ng-message="required">You did not enter a field</div>
+              <div ng-message="minlength">Your field is too short</div>
+              <div ng-message="maxlength">Your field is too long</div>
+            </div>
+
+            <label class="item item-input">
+              <span class="input-label">Password</span>
+              <input type="password" name="password" ng-model="loginData.password" ng-minlength="2" ng-maxlength="10" required>
+            </label>
+
+            <div ng-messages="loginForm.password.$error" ng-if="loginForm.password.$touched" style="color:maroon" role="alert">
+              <div ng-message="required">Please enter your Password</div>
+              <div ng-message="minlength">Your field is too short</div>
+              <div ng-message="maxlength">Your field is too long</div>
+            </div>
+
+            <label class="item item-input">
+              <span class="input-label">Phone number</span>
+              <input type="number" name="mobile" ng-model="loginData.mobile" required ng-pattern="^[789]\d{9}$">
+            </label>
+
+            <div ng-messages="loginForm.mobile.$error" ng-if="loginForm.mobile.$touched" style="color:maroon" role="alert">
+              <div ng-message="required">Please enter your Password</div>
+              <div ng-message="pattern">Not a valid number!</div>
+            </div>
+
+
+
+            <label class="item item-input">
+              <span class="input-label">Email Address</span>
+              <input name="email" type="email" ng-model="loginData.email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required>
+            </label>
+
+            <div ng-messages="loginForm.email.$error" ng-if="loginForm.email.$touched" style="color:maroon" role="alert">
+              <div ng-message="required">Please enter your email</div>
+              <div ng-message="pattern">Please enter a valid email address!</div>
+            </div>
+
+
+
+            <label class="item">
+              <button class="button button-block button-positive" type="submit" ng-disabled="loginForm.$invalid">Log in</button>
+            </label>
+          </div>
+        </form>
+      </ion-content>
+    </ion-pane>
+  </body>
+</html>
